@@ -26,6 +26,7 @@ craft-<name> = { git = "https://github.com/storytold/craft-libs", rev = "<commit
 ## Libraries
 
 - [`craft-platform`](crates/platform/README.md): optional native dialog lifecycle, Linux/BSD desktop appearance observation and browser download ownership; application policy stays in the apps.
+- [`craft-web-host`](crates/web-host/README.md): what a web page that hosts a Craft app offers it, the same for every app: the host's own file storage (`window.craftStorage`), host paths, and a queue that saves to the host one at a time. What a save means for a document stays in the app.
 
 - [`craft-ai-core`](crates/ai-core/README.md): the data model and contract for AI in the Craft Apps (connections, models, tools, requests, jobs, consent, history, route spec). Pure, no I/O, wasm-safe. Contract in [docs/ai-shared-layer.md](docs/ai-shared-layer.md).
 - [`craft-pdf`](crates/pdf/README.md): independently optional PDF parsing, interpretation, rasterization and guarded authoring. Apps retain layout, fonts, editing and export policy; writer-only consumers do not enable the shared reader.
