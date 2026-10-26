@@ -153,10 +153,9 @@ async fn a_save_pushed_when_one_finishes_still_waits_its_turn() {
     let done = queue.take_done();
     assert_eq!(done.len(), 3);
     assert!(done.iter().all(|d| d.1 == Err("disk full".to_string())));
-    // Never two writes at once.
+    // One write at a time, and the one pushed from the callback stays behind the save that was
+    // already waiting.
     let log = log();
-    assert!(
-        !log.contains(r#"["start","cloud:home/second.psd",1],["start""#) && !log.contains(r#"["start","cloud:home/first.psd",1],["start""#),
-        "{log}"
-    );
+    let order = r#"["start","cloud:home/first.psd",1],["end","cloud:home/first.psd"],["start","cloud:home/second.psd",1],["end","cloud:home/second.psd"],["start","cloud:home/again.psd",1],["end","cloud:home/again.psd"]"#;
+    assert!(log.contains(order), "{log}");
 }
